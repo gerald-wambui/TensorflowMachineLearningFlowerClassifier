@@ -49,4 +49,78 @@ train_data_gen = image_gen.flow_from_directory(batch_size=batch_size,
                                                shuffle=True,
                                                target_size=(IMG_SHAPE, IMG_SHAPE))
 
-#funto plot images
+#fun to plot images
+#This function will plot images in the form of a grid with 1 row and 5 columns where images are placed in each column.
+def plotImages(images_arr):
+    fig, axes = plt.subplots(1, 5, figsize=(20,20))
+    axes = axes.flatten()
+    for img, ax in zip( images_arr, axes):
+        ax.imshow(img)
+    plt.tight_layout()
+    plt.show()
+
+
+augmented_images = [train_data_gen[0][0][0] for i in range(5)]
+plotImages(augmented_images)
+
+#random rotation
+image_gen = ImageDataGenerator(rescale=1./255, rotation_range=45)
+train_data_gen = image_gen.flow_from_directory(batch_size=batch_size,
+                                               directory=train_dir,
+                                               shuffle=True,
+                                               target_size=(IMG_SHAPE, IMG_SHAPE))
+augmented_images = [train_data_gen[0][0][0]for i in range(5)]
+plotImages(augmented_images)
+
+#random zoom
+image_gen = ImageDataGenerator(rescale=1./255, zoom_range=0.5)
+train_data_gen=image_gen.flow_from_directory(batch_size=batch_size,
+                                             directory=train_dir,
+                                             shuffle=True,
+                                             target_size=(IMG_SHAPE, IMG_SHAPE))
+augmented_images = [train_data_gen[0][0][0] for i in range(5)]
+plotImages(augmented_images)
+
+#put it all together
+image_gen_train = ImageDataGenerator(
+    rescale=1./255,
+    rotation_range=40,
+    width_shift_range=0.2,
+    height_shift_range=0.2,
+    shear_range=0.2,
+    zoom_range=0.2,
+    horizontal_flip=True,
+    fill_mode='nearest'
+)
+train_data_gen = image_gen_train.flow_from_directory(batch_size=batch_size,
+                                                     directory=train_dir,
+                                                     shuffle=True,
+                                                     target_size=(IMG_SHAPE, IMG_SHAPE),
+                                                     class_mode='sparse')
+augmented_images = [train_data_gen[0][0][0] for i in range(5)]
+plotImages(augmented_images)
+
+image_gen_val = ImageDataGenerator(rescale=1./255)
+val_data_gen = image_gen_val.flow_from_directory(batch_size=batch_size,
+                                                 directory=val_dir,
+                                                 target_size=(IMG_SHAPE, IMG_SHAPE),
+                                                 class_mode='sparse')
+
+#cnn model creation
+model = tf.keras.models.Sequential([
+    tf.keras.layers.Conv2D(32, (3, 3), action='relu', input_shape=(150, 150, 3)),
+    tf.keras.layers.MaxPooling2D(2, 2),
+    tf.keras.layers.Conv2D(64, (3, 3), activation='relu'),
+    tf.keras.layers.MaxPooling2D(2, 2),
+    tf.keras.layers.Conv2D(128, (3, 3), activation='relu'),
+    tf.keras.layers.MaxPooling2D(2, 2),
+    tf.keras.layers.Conv2D(128, (3, 3), activation='relu'),
+    tf.keras.layers.MaxPooling2D(2, 2),
+    tf.keras.layers.Dropout(0.5),
+    tf.keras.layers.Flatten(),
+    tf.keras.layers.Dense(512, activation='relu'),
+    tf.keras.layers.Dense(2)
+])
+
+#compile the model
+
