@@ -123,4 +123,7 @@ model = tf.keras.models.Sequential([
 ])
 
 #compile the model
-
+model.compile(optimizer='adam',
+              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+              metrics=['accuracy'])
+#Train the model
