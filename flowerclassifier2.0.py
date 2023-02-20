@@ -35,3 +35,8 @@ for cl in classes:
     if not os.path.exists(os.path.join(base_dir, 'val', cl)):
       os.makedirs(os.path.join(base_dir, 'val', cl))
     shutil.move(v, os.path.join(base_dir, 'val', cl))
+
+round(len(images)*0.8)
+
+train_dir = os.path.join(base_dir, 'train')
+val_dir = os.path.join(base_dir, 'val')
