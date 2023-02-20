@@ -137,3 +137,9 @@ history = model.fit_generator(
 )
 
 #plot training and validation graphs using pyplot
+acc = history.history['accuracy']
+val_acc = history.history['val_accuracy']
+
+loss = history.history['loss']
+val_loss = history.history['val_loss']
+epochs_range = range(epochs)
