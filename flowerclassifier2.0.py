@@ -140,3 +140,12 @@ model.compile(optimizer='adam',
               metrics=['accuracy'])
 
 epochs = 80
+
+history = model.fit_generator(
+  train_data_gen,
+  steps_per_epoch=int(np.ceil(train_data_gen.n / float(batch_size))),
+  epochs=epochs,
+  validation_data=val_data_gen,
+  validation_steps=int(np.ceil(val_data_gen.n / float(batch_size)))
+
+)
