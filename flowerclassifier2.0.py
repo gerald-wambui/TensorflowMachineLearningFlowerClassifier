@@ -5,7 +5,7 @@ import shutil
 import matplotlib.pyplot as plt
 import tensorflow as tf
 
-
+#imports for our neural networks
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Conv2D, Flatten, Dropout, MaxPooling2D
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
@@ -42,3 +42,14 @@ round(len(images)*0.8)
 
 train_dir = os.path.join(base_dir, 'train')
 val_dir = os.path.join(base_dir, 'val')
+
+
+batch_size = 100
+IMG_SHAPE =150
+
+image_gen = ImageDataGenerator(rescale=1./255, horizontal_flip=True)
+train_data_gen = image_gen.flow_from_directory(batch_size=batch_size,
+                                               directory=train_dir,
+                                               shuffle=True,
+                                               target_size=(IMG_SHAPE, IMG_SHAPE)
+                                               )
