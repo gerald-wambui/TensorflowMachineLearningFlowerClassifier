@@ -149,3 +149,8 @@ history = model.fit_generator(
   validation_steps=int(np.ceil(val_data_gen.n / float(batch_size)))
 
 )
+
+acc = history.history['accuracy']
+val_acc = history.history['val_accuracy']
+
+#coming soon
