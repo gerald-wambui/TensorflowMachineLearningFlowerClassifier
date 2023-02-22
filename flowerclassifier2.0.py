@@ -53,3 +53,14 @@ train_data_gen = image_gen.flow_from_directory(batch_size=batch_size,
                                                shuffle=True,
                                                target_size=(IMG_SHAPE, IMG_SHAPE)
                                                )
+
+def plotImages(images_arr):
+  fig, axes = plt.subplots(1, 5, figsize=(20, 20))
+  axes = axes.flatten()
+  for img, ax in zip(images_arr, axes):
+    ax.imshow(img)
+  plt.tight_layout()
+  plt.show()
+
+augmented_images = [train_data_gen[0][0][0] for i in range(5)]
+plotImages(augmented_images)
