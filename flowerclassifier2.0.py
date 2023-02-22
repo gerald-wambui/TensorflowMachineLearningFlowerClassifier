@@ -116,3 +116,9 @@ train_data_gen = image_gen_train.flow_from_directory(batch_size=batch_size,
 augmented_images = [train_data_gen[0][0][0] for i in range(5)]
 plotImages(augmented_images)
 
+image_gen_val = ImageDataGenerator(rescale=1./255)
+
+val_data_gen = image_gen_val.flow_from_directory(batch_size=batch_size,
+                                                 directory=validation_dir,
+                                                 target_size=(IMG_SHAPE, IMG_SHAPE),
+                                                 class_mode='sparse')
