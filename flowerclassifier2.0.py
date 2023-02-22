@@ -138,3 +138,5 @@ model.add(Dense(5))
 model.compile(optimizer='adam',
               loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
               metrics=['accuracy'])
+
+epochs = 80
