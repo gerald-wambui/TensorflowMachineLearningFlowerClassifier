@@ -140,3 +140,5 @@ model.compile(optimizer='adam',
               metrics=['accuracy'])
 
 epochs = 80
+
+history = model.fit_generator()
