@@ -100,3 +100,16 @@ def plotImages(images_arr):
 augmented_images = [train_data_gen[0][0][0] for i in range(5)]
 plotImages(augmented_images)
 
+image_gen_train = ImageDataGenerator(rescale=1./255,
+                                     rotation_range=45,
+                                     width_shift_range=.15,
+                                     height_shift_range=.15,
+                                     horizontal_flip=True,
+                                     zoom_range=0.5
+                                     )
+train_data_gen = image_gen_train.flow_from_directory(batch_size=batch_size,
+                                                     directory=train_dir,
+                                                     shuffle=True,
+                                                     target_size=(IMG_SHAPE, IMG_SHAPE),
+                                                     class_mode='sparse'
+                                                     )
