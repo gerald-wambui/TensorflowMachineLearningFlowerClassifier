@@ -155,3 +155,7 @@ acc = history.history['accuracy']
 val_acc = history.history['val_accuracy']
 
 #plot training and validation graphs
+acc = history.history['accuracy']
+val_acc = history.history['val_accuracy']
+
+loss
