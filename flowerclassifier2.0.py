@@ -154,4 +154,4 @@ history = model.fit_generator(
 acc = history.history['accuracy']
 val_acc = history.history['val_accuracy']
 
-#coming soon
+#plot training and validation graphs
