@@ -158,4 +158,7 @@ val_acc = history.history['val_accuracy']
 acc = history.history['accuracy']
 val_acc = history.history['val_accuracy']
 
-loss
+loss = history.history['loss']
+val_loss = history.history['val_loss']
+
+epochs_range = range(epochs)
