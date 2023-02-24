@@ -169,3 +169,6 @@ plt.plot(epochs_range, acc, label='Training Accuracy')
 plt.plot(epochs_range, val_acc, label='Validation Accuracy')
 plt.legend(loc='lower right')
 plt.title('Training and Validation Accuracy')
+
+plt.subplot(1, 2, 2)
+plt,plot(epochs_range, loss, label='Training Loss')
