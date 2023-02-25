@@ -17,6 +17,7 @@ zip_file = tf.keras.utils.get_file(origin=URL,
                                    fname="flower_photos.tgz",
                                    extract=True)
 base_dir = os.path.join(os.path.dirname(zip_file), 'flower_photos')
+
 #types of flowers to classify
 classes = ['roses', 'daisy', 'dandelion', 'sunflowers', 'tulips']
 
@@ -119,9 +120,10 @@ plotImages(augmented_images)
 image_gen_val = ImageDataGenerator(rescale=1./255)
 
 val_data_gen = image_gen_val.flow_from_directory(batch_size=batch_size,
-                                                 directory=validation_dir,
+                                                 directory=val_dir,
                                                  target_size=(IMG_SHAPE, IMG_SHAPE),
                                                  class_mode='sparse')
+#create model
 model = Sequential()
 model.add(Conv2D(16, 3, padding='same', activation='relu', input_shape=(IMG_SHAPE, IMG_SHAPE, 3)))
 model.add(MaxPooling2D(pool_size=(2, 2)))
