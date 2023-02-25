@@ -1,11 +1,14 @@
 import os
-import  numpy as np
+import numpy as np
 import glob
 import shutil
 import matplotlib.pyplot as plt
 import tensorflow as tf
 
-#imports for our neural networks
+'''
+imports for our 
+neural networks
+'''
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Conv2D, Flatten, Dropout, MaxPooling2D
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
@@ -41,6 +44,7 @@ for cl in classes:
 
 round(len(images)*0.8)
 
+#train and validation directories
 train_dir = os.path.join(base_dir, 'train')
 val_dir = os.path.join(base_dir, 'val')
 
@@ -119,6 +123,7 @@ plotImages(augmented_images)
 
 image_gen_val = ImageDataGenerator(rescale=1./255)
 
+#validation dataset
 val_data_gen = image_gen_val.flow_from_directory(batch_size=batch_size,
                                                  directory=val_dir,
                                                  target_size=(IMG_SHAPE, IMG_SHAPE),
